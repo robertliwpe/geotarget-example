@@ -6,25 +6,26 @@ Version: 1.1
 License: GPLv2
 */
 
-function country_geo_redirect() {
+function country_region_geo_redirect() {
 
 $country = getenv('HTTP_GEOIP_COUNTRY_CODE');
+$region = getenv('HTTP_GEOIP_REGION')
 
-if ( $country == "US" ) {
+if ( $country == "AU" and $region == "07") {
 
-wp_redirect( 'https://en.wikipedia.org/wiki/United_States', 301 );
-
-     exit;
-
-} else if ( $country == "BR" ) {
-
-wp_redirect( 'https://en.wikipedia.org/wiki/Brazil', 301 );
+wp_redirect( 'http://domain.com/melbourne', 301 );
 
      exit;
 
-}else if ( $country !== "(US|BR)" ) {
+} else if ( $country == "AU" and $region !== "07" ) {
 
-wp_redirect( 'https://en.wikipedia.org/wiki/Earth', 301 );
+wp_redirect( 'http://domain.com/', 301 );
+
+     exit;
+
+}else if ( $country !== "AU" ) {
+
+wp_redirect( 'https://www.youtube.com/watch?v=RD3icaZLp6Q', 301 );
 
      exit;
 
@@ -32,4 +33,4 @@ wp_redirect( 'https://en.wikipedia.org/wiki/Earth', 301 );
 
 }
 
-add_action('init', 'country_geo_redirect');
+add_action('init', 'country_region_geo_redirect');
